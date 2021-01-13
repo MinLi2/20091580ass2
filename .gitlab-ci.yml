@@ -20,7 +20,7 @@ stages:
   - install
   - build
   - test
-  - staging
+ 
 # Jobs:
 
 install_dependencies:
