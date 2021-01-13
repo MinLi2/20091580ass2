@@ -20,7 +20,7 @@ stages:
   - install
   - build
   - test
-
+  - staging
 # Jobs:
 
 install_dependencies:
@@ -39,3 +39,5 @@ test_api:
   stage: test
   script:
     - npm test
+    
+
