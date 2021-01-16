@@ -54,3 +54,11 @@ export const getMovies = () => {
       .then(res => res.json())
       .then(json => json.results);
   };
+
+  export const getTopRatedMovie = () => {
+    return fetch(
+      `https://api.themoviedb.org/3/movie/top_rated?api_key=${process.env.TMDB_KEY}&language=en-US&page=1`
+    )
+      .then(res => res.json())
+      .then(json => json.results);
+  };
