@@ -20,11 +20,11 @@ describe("Movies endpoint", function (){
   //     console.error(`failed to Load user Data: ${err}`);
   //   }
   // });
-  this.timeout(6400);
+  this.timeout(12000);
   before((done) => {
     setTimeout(() => {
       done();
-    },5000);
+    },6000);
   });
   before((done) => {
     request(api)
@@ -84,4 +84,36 @@ describe("Movies endpoint", function (){
       });
     });
   });
+
+
+describe("post a new movie", () => {
+it("should return the new movie added with a random id and a status 201", () => {
+  return request(api)
+    .post("/api/movies")
+    .set("Accept", "application/json")
+    .set("Authorization", token)
+    .send({
+      title: "TimeFlyer"
+    })
+    .expect(201)
+    .then((res) => {
+      expect(res.body).to.have.property("id");
+      expect(res.body).to.have.property("title","TimeFlyer");
+    });
+});
+});
+
+// describe("delete movie", () => {
+// it("should return the success message and a status 200", () => {
+//   return request(api)
+//     .delete(`/api/movies/${sampleMovie.id}`)
+//     .set("Authorization", token)
+//     .expect("Content-Type", /json/)
+//     .expect(200)
+//     .expect({
+//       message: `Deleted movie id: ${sampleMovie.id}.`,
+//       status: 200
+//     });
+// });
+// });
 });
