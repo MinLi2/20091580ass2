@@ -39,7 +39,6 @@ describe("upcoming endpoint", function (){
         done();
       });
   });
-
   afterEach(() => {
     api.close(); // Release PORT 8080
     delete require.cache[require.resolve("../../../../index")];
