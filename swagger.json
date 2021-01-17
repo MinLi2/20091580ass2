@@ -9,6 +9,8 @@
 
  {
               "name": "Movies"
+              
+              
           }
 
 
@@ -38,24 +40,8 @@
               }
           },
       
-        "/api/actor": {
-            "get": {
-                "tags": [
-                    "actor"
-                ],
-                "summary": "Get actors",
-                "description": "Get actors",
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "return actors"
-                    }
-                }
-            }
-            
-         },
+    
+
          "/api/nowplaying": {
             "get": {
                 "tags": [
@@ -78,8 +64,8 @@
                 "tags": [
                     "nowplaying"
                 ],
-                "summary": "Get one specfied nowplaying movie",
-                "description": "Get one nowplaying movie",
+                "summary": "Get new nowplaying movie",
+                "description": "Get new nowplaying movie",
                 "produces": [
                     "application/json"
                 ],
@@ -95,19 +81,61 @@
                 "tags": [
                     "upcoming"
                 ],
-                "summary": "Get one specfied nowplaying movie",
-                "description": "Get one nowplaying movie",
+                "summary": "Get new upcoming movie",
+                "description": "Get upcoming movie",
                 "produces": [
                     "application/json"
                 ],
                 "responses": {
                     "200": {
-                        "description": "return one nowplaying movie"
+                        "description": "return upcoming movie"
                     }
                 }
             }
         },
-        "/api/users?action=authenticate": {
+        "/api/actor": {
+            "get": {
+                "tags": [
+                    "actor"
+                ],
+                "summary": "Get actors",
+                "description": "Get actors",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "return actors"
+                    }
+                }
+            }
+            
+         },
+         "/api/actor/${id}": {
+            "delete": {
+                "tags": [
+                    "actor"
+                ],
+                "summary": "delete a actor",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "actorId",
+                        "description": "delete",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                       "description": "success"
+                    }
+                }
+            }
+          },
+          "/api/users?action=authenticate": {
             "post": {
                 "tags": [
                     "User"
@@ -132,6 +160,48 @@
                     }
                 }
             }
+        },
+        "/api/users/{$username}/favourites": {
+          "post": {
+              "tags": [
+                  "User"
+              ],
+              "summary": "add favourtie movie to favourites",
+              "description": "Auth",
+              "produces": [
+                  "application/json"
+              ],
+              "parameters": [
+                  {
+                      "in": "body",
+                      "name": "body",
+                      "description": "movie",
+                      "required": true
+                  }
+              ],
+              "responses": {
+                  "200": {
+                     "description": "success"
+                  }
+              }
+          }
+        },
+        "/api/users/${username}/favourites": {
+          "get": {
+              "tags": [
+                  "User"
+              ],
+              "summary": "get user's favourtie movie",
+              "description": "Auth",
+              "produces": [
+                  "application/json"
+              ],
+              "responses": {
+                  "200": {
+                     "description": "favourite movie"
+                  }
+              }
+          }
         }
 
         }
