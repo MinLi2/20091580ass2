@@ -39,6 +39,7 @@ describe("Users endpoint", () => {
         console.log(token)
         done();
       });
+      
   });
 
   after(async () => {
