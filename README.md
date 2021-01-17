@@ -65,7 +65,9 @@ If you have your API design on an online platform or graphic, please link to it 
 
 ## Security and Authentication
 Give details of authentication/ security implemented on the API(e.g. passport/sessions). Indicate which routes are protected.
-
+app.use('/api/movies', passport.authenticate('jwt', {session: false}), moviesRouter);
+app.use('/api/users', passport.authenticate('jwt', {session: false}), usersRouter);
+app.use('/api/toprated', passport.authenticate('jwt', {session: false}), topratedRouter);
 ## Integrating with React App
 
 Describe how you integrated your React app with the API. Perhaps link to the React App repo and give an example of an API call from React App. For example: 
