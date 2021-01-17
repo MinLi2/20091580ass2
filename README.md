@@ -1,65 +1,141 @@
-# Assignment 2 - Agile Software Practice.
+# Assignment 2 - Web API.
 Min Li
-## Target Web API.
 
-...... Document the Web API that is the target for this assignment's CI/CD pipeline. Include the API's endpoints and any other features relevant to the creation of a suitable pipeline, e.g.
+## Features.
 
-+ Get /api/movies - returns an array of movie objects.
-+ Get /api/movies/:id - returns detailed information on a specific movie.
-+ Put /api/movies/:id - update a specific movie. The request payload includes the some/all of the following movie properties to be updated: title, genre list, release date.
-+ Post /api/movies - add a new movie to the database.
-+ Delete /api/movies - delete the movie in the database.
-+ Get /api/movie - return an array of movie details.
-+ Get /api/upcoming - return an array of upcoming movies.
-+ Post /api/upcoming - add a new upcoming movie to the database.
-+ Put /api/upcoming/:id - update a specific upcoming movie.
-+ Delete /api/upcoming - delete the upcoming movie in the database.
-+ Get /api/nowplaying - return an array of nowplaying movies.
-+ Post /api/nowplaying - add a new nowplaying movie to the database.
-+ Put /api/nowplaying/:id -  update a specific nowplaying movie.
-+ Delete /api/nowplaying - delete the nowplaying movie in the database.
-+ Get /api/actors - return an array of actors.
-+ Get /api/actors/:id - return an array of actor details.
-+ Get /api/users - return all users.
-+ Post /api/users - Register and authenticate a user.
-+ Put /api/users/:id - Update a user.
-+ Post /api/users/userName/favourites - add a favourite handling.
-+ Get /api/users/userName/favourites - get the faourite handing information.
+...... A bullet-point list of the ADDITIONAL features you have implemented in the API **THAT WERE NOT IN THE LABS** ......,
+ 
+ + Feature 1 - Integrate movie, moviedetail, upcoming, nowplaying, actor, actordetail  with React
+ + Feature 2 - use get/get id operation in actor
+ + Feature 3 - use get/get id operation in actordetail
+ + Feature 4 - use get/get id operation in moviedetail
+ + Feature 5 - use get/get id, get reviews, post, put id, delete operation in actordetail
+ + Feature 6 - use get/get id, getreviews, put id, delete id operation in nowplaying
+ + Feature 7 - use get/get id, getreviews, put id, delete id operation in upcoming
+ + Feature 8 - use get, post, put id, post favourites, get favourites operation in users
+## Installation Requirements
 
-## Error/Exception Testing.
-
-.... From the list of endpoints above, specify those that have error/exceptional test cases in your test code, the relevant test file and the nature of the test case(s), e.g.
-
-+ Post /api/movies - test when the new movie has no title, invalid release date, empty genre list. Test adding a movie without prior authentication. See tests/functional/api/movies/index.js 
-+ get /api/movies/:id - test when enter invalid movies id
-+ delete /api/moives/:id - test delete movie when enter a wrong id
-+ get /api/upcoming/:id - test when enter invalid upcoming movies id
-+ delete /api/upcoming/:id - test delete movie when enter a wrong id
-+ get /api/nowplaying/:id - test when enter invalid nowplaying movies id
-## Continuous Delivery/Deployment.
-
-..... Specify the URLs for the staging and production deployments of your web API, e.g.
-
-+ https://movies-api-staging222.herokuapp.com/ Staging deployment
-+ https://movie-staging3.herokuapp.com/ - Production
-
-.... Show a screenshots from the overview page for the two Heroku apps e,g,
-
-+ Staging app overview 
-
-![][stagingapp]
-
-+ Production app overview 
-![][production]
+Describe what needs to be on the machine to run the API (Node v?, NPM, MongoDB instance, any other 3rd party software not in the package.json). 
 
 
+npm install -g swagger
+npm install openapi-types
 
-[If an alternative platform to Heroku was used then show the relevant page from that platform's UI.]
+```
 
-## Feature Flags (If relevant)
+## API Configuration
+Describe any configuration that needs to take place before running the API. For example, creating an ``.env`` and what variables to put in it. Give an example of how this might be structured/done.
+REMEMBER: DON'T PUT YOUR OWN USERNAMES/PASSWORDS/AUTH KEYS IN THE README OR ON GITHUB, just placeholders as indicated below:
 
-... Specify the feature(s) in your web API that is/are controlled by a feature flag(s). Mention the source code files that contain the Optimizerly code that implement the flags. Show screenshots (with appropriate captions) from your Optimizely account that prove you successfully configured the flags.
+```bat
+NODE_ENV=development
+PORT=8080
+HOST=localhost
+mongoDB=MyMongoURL
+seedDb=true
+secret=MyJWTSecret
+```
 
 
-[stagingapp]: ./img/stagingapp.png
-[production]: ./img/production.png
+## API Design
+Give an overview of your web API design, perhaps similar to the following: 
+
+|  |  GET | POST | PUT | DELETE
+| -- | -- | -- | -- | -- 
+| /api/movies |Gets a list of movies | N/A | N/A |
+| /api/movies/{movieid} | Get a Movie | N/A | N/A | N/A
+| /api/movies/{movieid}/reviews | Get all reviews for movie | Create a new review for Movie | N/A | N/A  
+| /api/users/get all users|register users| N/A | N/A
+| /api/users/{personid}| N/A| update a user| N/A | N/A
+| /api/users/:userName/favourites|get the favourite list| N/A|add to favourite list| N/A
+| /api/actors|get a list of actors| N/A | N/A | N/A
+| /api/actors/{personid}|get an actor| N/A | N/A | N/A
+| /api/nowplaying|get a list of nowplaying movie|N/A|N/A|N/A
+| /api/nowplaying/{movieid}|get nowplaying movie|N/A|update nowplaying movie|delete noplaying movie
+| /api/nowplaying/{movieid}/reviews | Get all reviews for movie | Create a new review for Movie | N/A | N/A  
+| /api/upcoming|get a list of upcoming movie|N/A|N/A|N/A
+| /api/upcoming/{movieid}|get upcoming movie|N/A|update upcoming movie|delete upcoming movie
+| /api/upcoming/{movieid}/reviews | Get all reviews for movie | Create a new review for Movie | N/A | N/A  
+| ... | ... | ... | ... | ...
+
+If you have your API design on an online platform or graphic, please link to it (e.g. [Swaggerhub](https://app.swaggerhub.com/)).
+
+
+## Security and Authentication
+Give details of authentication/ security implemented on the API(e.g. passport/sessions). Indicate which routes are protected.
+
+## Integrating with React App
+
+Describe how you integrated your React app with the API. Perhaps link to the React App repo and give an example of an API call from React App. For example: 
+
+~~~Javascript
+export const getMovies = () => {
+  return fetch(
+    '/api/movies',{headers:{
+      'Authorization': window.localStorage.getItem('token') 
+    },
+  method:'get',
+    }
+    ).then(res => res.json());
+    
+};
+  
+   export const getMovie = id => {
+    return fetch(`/api/movie/${id}`, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    method:'get',
+      }
+      ).then(res => res.json());
+      
+  };
+    export const  getUpcomingMovie = () => {
+    return fetch(
+      '/api/upcoming',{headers:{
+        'Authorization': window.localStorage.getItem('token') 
+      },
+    method:'get',
+      }
+      ).then(res => res.json());
+      
+  };
+    export const getNowPlayingMovie = () => {
+    return fetch(
+      '/api/nowplaying',{headers:{
+        'Authorization': window.localStorage.getItem('token') 
+      },
+    method:'get',
+      }
+      ).then(res => res.json());
+      
+  };
+ export const getPeople = () => {
+    return fetch(
+      '/api/actors',{headers:{
+        'Authorization': window.localStorage.getItem('token') 
+      },
+    method:'get',
+      }
+      ).then(res => res.json());
+      
+  };
+  export const getPeopleDetails = id => {
+    return fetch(`/api/actordetails/${id}`, {
+      headers: {
+        'Authorization': window.localStorage.getItem('token') 
+      },
+    method:'get',
+      }
+      ).then(res => res.json());
+      
+  };
+~~~
+
+## Extra features
+
+Using swagger to build and test APIs
+
+## Independent learning.
+
+Using swagger to build and test APIs

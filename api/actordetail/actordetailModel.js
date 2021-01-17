@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 
-const ActordetailSchema = new Schema({
+const actordetailSchema = new Schema({
   adult: { type: Boolean },
   gender: { type: Number },
   id: { type: Number, required: true },
@@ -19,8 +19,8 @@ const ActordetailSchema = new Schema({
 
 
 });
-ActordetailSchema.statics.findByActorDBId = function (id) {
+actordetailSchema.statics.findByActorDBId = function (id) {
   return this.findOne({ id: id });
 };
 
-export default mongoose.model('actordetail', ActordetailSchema);
+export default mongoose.model('actordetail', actordetailSchema);
