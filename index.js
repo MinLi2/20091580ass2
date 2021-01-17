@@ -66,7 +66,7 @@ app.use('/api/genres', genresRouter);
 //Users router
 app.use('/api/users', usersRouter);
 app.use('/api/actors', peopleRouter);
-app.use('/api/actordetails', peopledetailsRouter);
+app.use('/api/actordetail', peopledetailsRouter);
 app.use('/api/nowplaying', nowplayingRouter);
 app.use('/api/upcoming', upcomingRouter);
 app.use('/api/toprated', topratedRouter);
