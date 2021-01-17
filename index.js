@@ -18,7 +18,7 @@ import loglevel from 'loglevel';
 // import swaggerUi from 'swagger-ui-express'
 
 
-const specs = require('./swagger.json')
+// const specs = require('./swagger.json')
 
 
 dotenv.config();
