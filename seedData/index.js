@@ -76,7 +76,6 @@ export async function loadMovies() {
 //     console.error(`failed to Load movies Data: ${err}`);
 //   }
 // }
-  
 
 export async function loadActors() {
   console.log('load actors');

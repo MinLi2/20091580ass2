@@ -60,6 +60,8 @@ Give an overview of your web API design, perhaps similar to the following:
 
 If you have your API design on an online platform or graphic, please link to it (e.g. [Swaggerhub](https://app.swaggerhub.com/)).
 
+[Swaggerhub](https://app.swaggerhub.com/apis/MinLi2/MinLi2/1.0.0#/movies/updateRating)
+
 
 ## Security and Authentication
 Give details of authentication/ security implemented on the API(e.g. passport/sessions). Indicate which routes are protected.

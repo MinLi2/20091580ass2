@@ -64,12 +64,16 @@ app.use('/api/movies', passport.authenticate('jwt', {session: false}), moviesRou
 app.use('/api/movie', moviedetailRouter);
 app.use('/api/genres', genresRouter);
 //Users router
-app.use('/api/users', usersRouter);
+app.use('/api/users', passport.authenticate('jwt', {session: false}), usersRouter);
 app.use('/api/actors', peopleRouter);
 app.use('/api/actordetail', peopledetailsRouter);
 app.use('/api/nowplaying', nowplayingRouter);
 app.use('/api/upcoming', upcomingRouter);
+
 app.use('/api/toprated', topratedRouter);
+
+app.use('/api/toprated', passport.authenticate('jwt', {session: false}), topratedRouter);
+
  app.use(
    "/",
    swaggerUi.serve,

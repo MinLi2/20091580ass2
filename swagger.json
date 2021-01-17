@@ -2,7 +2,7 @@
     {
       "openapi": "3.0.0",
       "info": {
-          "description": "ASS2"
+          "description": "Assignment2"
       },
       "tags": [
 
@@ -37,8 +37,43 @@
                           "description": "return movies"
                       }
                   }
-              }
+              },
+              "post": {
+                "tags": [
+                    "Movies"
+                ],
+                      
+                "summary": "post new movies",
+                "description": "post movies",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "return movies"
+                    }
+                }
+            }
           },
+       
+          "/api/movies/${id}": {
+            "delete": {
+                "tags": [
+                    "Movies"
+                ],
+                      
+                "summary": "delete movies",
+                "description": "Delete movies",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "return movies"
+                    }
+                }
+            }
+        },
     
 
          "/api/nowplaying": {
@@ -73,8 +108,41 @@
                         "description": "return one nowplaying movie"
                     }
                 }
+            },
+            "put": {
+                "tags": [
+                    "nowplaying"
+                ],
+                "summary": "Update nowplaying movie",
+                "description": "put nowplaying movie",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "put nowplaying movie"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "nowplaying"
+                ],
+                "summary": "Delete nowplaying movie",
+                "description": "delete nowplaying movie",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "delete nowplaying movie"
+                    }
+                }
             }
         },
+      
+        
+
         "/api/upcoming": {
             "get": {
                 "tags": [
@@ -88,6 +156,23 @@
                 "responses": {
                     "200": {
                         "description": "return upcoming movie"
+                    }
+                }
+            }
+        },
+        "/api/upcoming/${id}": {
+            "get": {
+                "tags": [
+                    "upcoming"
+                ],
+                "summary": "Get new upcoming movie",
+                "description": "Get new upcoming movie",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "return one upcoming movie"
                     }
                 }
             }
@@ -160,12 +245,37 @@
                 }
             }
         },
+        "/api/users": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "get all users",
+                "description": "Auth",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "user",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                       "description": "success"
+                    }
+                }
+            }
+          },
         "/api/users/{$username}/favourites": {
           "post": {
               "tags": [
                   "User"
               ],
-              "summary": "add favourtie movie to favourites",
+              "summary": "add to favourites",
               "description": "Auth",
               "produces": [
                   "application/json"
@@ -174,7 +284,7 @@
                   {
                       "in": "body",
                       "name": "body",
-                      "description": "movie",
+                      "description": "user",
                       "required": true
                   }
               ],
@@ -190,7 +300,7 @@
               "tags": [
                   "User"
               ],
-              "summary": "get user's favourtie movie",
+              "summary": "get favourtie movie",
               "description": "Auth",
               "produces": [
                   "application/json"
