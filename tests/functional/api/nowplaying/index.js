@@ -1,12 +1,10 @@
 import chai from "chai";
 import request from "supertest";
 import api from "../../../../index";  // Express API application 
-
 const expect = chai.expect;
 const currentNowplayingmovieId = 508442;
 const currentNowplayingmovieTitle = "Soul";
 let token;
-
 describe('Nowplaying endpoint',  function (){
     this.timeout(5000)
     before((done)=>{

@@ -9,7 +9,6 @@ const expect = chai.expect;
 let db;
 //let api;
 let token;
-
 const users = [
   {
     username: "user1",
@@ -78,7 +77,6 @@ describe("Users endpoint", () => {
         });
     });
   });
-
   describe("POST / ", () => {
     it("should return a 200 status and the confirmation message", () => {
       return request(api)
@@ -97,6 +95,7 @@ describe("Users endpoint", () => {
         .expect("Content-Type", /json/)
         .expect(200)
         .then((res) => {
+
           expect(res.body).to.be.a("array");
           expect(res.body.length).to.equal(3);
           let result = res.body.map((user) => user.username);
@@ -104,4 +103,5 @@ describe("Users endpoint", () => {
         });
     });
   });
+
 });

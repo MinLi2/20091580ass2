@@ -15,10 +15,10 @@ import topratedRouter from './api/toprated';
 import bodyParser from 'body-parser';
 import usersRouter from './api/users';
 import loglevel from 'loglevel';
-import swaggerUi from 'swagger-ui-express'
+// import swaggerUi from 'swagger-ui-express'
 
 
-const specs = require('./swagger.json')
+// const specs = require('./swagger.json')
 
 
 dotenv.config();
@@ -70,11 +70,11 @@ app.use('/api/actordetails', peopledetailsRouter);
 app.use('/api/nowplaying', nowplayingRouter);
 app.use('/api/upcoming', upcomingRouter);
 app.use('/api/toprated', topratedRouter);
-app.use(
-  "/",
-  swaggerUi.serve,
-  swaggerUi.setup(specs)
-);
+// app.use(
+//   "/",
+//   swaggerUi.serve,
+//   swaggerUi.setup(specs)
+// );
 app.use(errHandler);
 
 
