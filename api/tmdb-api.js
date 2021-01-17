@@ -22,6 +22,15 @@ export const getMovies = () => {
       .then(res => res.json())
       .then(json => json.results);
   };
+  export const getActor = person_id => {
+    return fetch(
+      `https://api.themoviedb.org/3/person/${person_id}?api_key=${process.env.TMDB_KEY}&language=en-US`
+  
+    )
+      .then(res => res.json())
+  
+  };
+
 
   export const getGenres = () => {
     return fetch(

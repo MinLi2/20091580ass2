@@ -1,13 +1,19 @@
 import userModel from '../api/users/userModel';
 import movieModel from '../api/movies/movieModel';
+import onemovieModel from '../api/moviedetail/moviedetailModel';
 import actorModel from '../api/actors/actorModel';
 import nowplayingModel from '../api/nowplaying/nowplayingModel';
-import upcomingModel from '../api/upcoming/upcomingModel';
-import {movies} from './movies.js';
+import upcomingModel from '../api/upcoming/upcomingModel'
+import actordetailModel from '../api/actordetail/actordetailModel';
+import topratedModel from '../api/toprated/topratedModel';
+//import {movies} from './movies.js';
+import {getMovie} from '../api/tmdb-api';
+import {getMovies} from '../api/tmdb-api';
 import {getPeople} from '../api/tmdb-api';
 import {getNowPlayingMovie} from '../api/tmdb-api';
 import {getUpcomingMovie} from '../api/tmdb-api';
 import {getTopRatedMovie} from '../api/tmdb-api';
+import {getActor} from '../api/tmdb-api';
 const users = [
   {
     'username': 'user1',
@@ -33,28 +39,62 @@ export async function loadUsers() {
 
 // deletes all movies documents in collection and inserts test data
 export async function loadMovies() {
-  console.log('load seed data');
-  console.log(movies.length);
+  console.log('load Movies');
   try {
-    await movieModel.deleteMany();
-    await movieModel.collection.insertMany(movies);
-    console.info(`${movies.length} Movies were successfully stored.`);
+    getMovies().then(async res => {
+      await movieModel.deleteMany();
+      await onemovieModel.deleteMany();
+      await movieModel.collection.insertMany(res);
+      console.info(`${res.length} Movies successfully stored.`);
+      res.map(async (movie)=>{
+        await getMovie(movie.id).then(async (res)=>{
+          await onemovieModel.collection.insertOne(res,(err)=>{if(err) console.log(err);})
+        }
+        )
+      })
+    })
   } catch (err) {
-    console.error(`failed to Load movie Data: ${err}`);
+    console.error(`failed to Load movies Data: ${err}`);
   }
 }
+// export async function loadMovies() {
+//   console.log('load Movies');
+//   try {
+//     getMovies().then(async res => {
+//       await movieModel.deleteMany();
+//       await onemovieModel.deleteMany();
+//       await movieModel.collection.insertMany(res);
+//       console.info(`${res.length} Movies successfully stored.`);
+//       res.map(async (movie)=>{
+//         await getMovie(movie.id).then(async (res)=>{
+//           await onemovieModel.collection.insertOne(res,(err)=>{if(err) console.log(err);})
+//         }
+//         )
+//       })
+//     })
+//   } catch (err) {
+//     console.error(`failed to Load movies Data: ${err}`);
+//   }
+// }
+  
 
-export async function loadActor() {
+export async function loadActors() {
   console.log('load actors');
   try {
-  getPeople().then(async res =>{
-    await actorModel.deleteMany();
-    await actorModel.collection.insertMany(res);
-    console.info(`${res.length} actor were successfully stored.`);
-    
-  })
- } catch (err) {
-    console.error(`failed to Load actor Data: ${err}`);
+    getPeople().then(async res => {
+      await actorModel.deleteMany();
+      await actordetailModel.deleteMany();
+      await actorModel.collection.insertMany(res);
+      console.info(`${res.length} actors successfully stored.`);
+      res.map(async (actor)=>{
+        await getActor(actor.id).then(async (res)=>{
+          await actordetailModel.collection.insertOne(res,(err)=>{if(err) console.log(err);})
+        }
+        )
+      })
+    })
+  } catch (err) {
+    console.error(`failed to Load actors Data: ${err}`);
   }
 }
 
@@ -91,8 +131,8 @@ export async function loadTopratedMovies() {
   console.log('load nowplaying movies');
   try {
     getTopRatedMovie().then(async TopratedMovies =>{
-    await upcomingModel.deleteMany();
-    await  upcomingModel.collection.insertMany(TopratedMovies);
+    await topratedModel.deleteMany();
+    await  topratedModel.collection.insertMany(TopratedMovies);
     console.info(`${TopratedMovies.length} Toprated Movies were successfully stored.`);4
   })
   } catch (err) {

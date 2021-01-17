@@ -1,0 +1,139 @@
+
+    {
+      "openapi": "3.0.0",
+      "info": {
+          "description": "ASS2"
+      },
+      "tags": [
+
+
+ {
+              "name": "Movies"
+          }
+
+
+ ],
+
+      "schemes": [
+          "http"
+      ],
+
+      "paths": {
+          "/api/movies": {
+              "get": {
+                  "tags": [
+                      "Movies"
+                  ],
+                        
+                  "summary": "Get all movies",
+                  "description": "Get movies",
+                  "produces": [
+                      "application/json"
+                  ],
+                  "responses": {
+                      "200": {
+                          "description": "return movies"
+                      }
+                  }
+              }
+          },
+      
+        "/api/actor": {
+            "get": {
+                "tags": [
+                    "actor"
+                ],
+                "summary": "Get actors",
+                "description": "Get actors",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "return actors"
+                    }
+                }
+            }
+            
+         },
+         "/api/nowplaying": {
+            "get": {
+                "tags": [
+                    "nowplaying"
+                ],
+                "summary": "Get nowplaying movies",
+                "description": "Get nowplaying movies",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "return nowplaying movies"
+                    }
+                }
+            }
+        },
+        "/api/nowplaying/${id}": {
+            "get": {
+                "tags": [
+                    "nowplaying"
+                ],
+                "summary": "Get one specfied nowplaying movie",
+                "description": "Get one nowplaying movie",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "return one nowplaying movie"
+                    }
+                }
+            }
+        },
+        "/api/upcoming": {
+            "get": {
+                "tags": [
+                    "upcoming"
+                ],
+                "summary": "Get one specfied nowplaying movie",
+                "description": "Get one nowplaying movie",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "return one nowplaying movie"
+                    }
+                }
+            }
+        },
+        "/api/users?action=authenticate": {
+            "post": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Post user data",
+                "description": "Auth",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "User data",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "sucess": true,
+                        "token": "value"
+                    }
+                }
+            }
+        }
+
+        }
+    }
+    
