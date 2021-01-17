@@ -41,7 +41,7 @@ describe("Movies endpoint", function (){
   });
 
   afterEach(() => {
-    api.close(); // Release PORT 8080
+    api.close();
     delete require.cache[require.resolve("../../../../index")];
   });
   describe("GET /movies ", () => {
@@ -86,6 +86,7 @@ describe("Movies endpoint", function (){
   });
 
 
+describe("Post /movies/:id", () => {
 describe("post a new movie", () => {
 it("should return the new movie added with a random id and a status 201", () => {
   return request(api)
@@ -103,6 +104,17 @@ it("should return the new movie added with a random id and a status 201", () => 
 });
 });
 
+});
+//  describe("Delete /movies/:id", () => {
+//  describe("when the movie's id invild",()=>{
+//    it("should return the message the id is invild and can not be found",()=>{
+//      return request(api)
+//        .delete(`/api/movies/9999999999`)
+//        .set("Accept", "application/json")
+//        .set("Authorization", token)
+//        .expect({});
+//    });})
+//  })
 //   describe("delete movie", () => {
 //   it("should return the success message and a status 200", () => {
 //     return request(api)

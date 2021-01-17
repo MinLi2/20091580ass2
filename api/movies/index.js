@@ -40,6 +40,25 @@ if(newMovie && newMovie.title) {
 }
 })
 
+// Update a movie
+router.put('/:id', (req, res) => {
+  const key = parseInt(req.params.id);
+  const updateMovie = req.body;
+  const index = moviesObject.movies.map((movie) => {
+    return movie.id;
+  }).indexOf(key);
+  if (index !== -1) {
+    !updateMovie.id ? updateMovie.id = key : updateMovie
+    moviesObject.movies.splice(index, 1, updateMovie);
+    res.status(200).send(updateMovie);
+  } else {
+    res.status(404).send({
+      message: 'Unable to find Movie',
+      status: 404
+    });
+  }
+});
+
 router.delete('/:id', async (req, res) => {
    const key = parseInt(req.params.id);
    const movie = await movieModel.findBYMovieDBId(key);
