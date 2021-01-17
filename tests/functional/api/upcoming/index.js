@@ -7,12 +7,12 @@ const expect = chai.expect;
 //let api;
 let token;
 
-const sampleMovie = {
-  id: 337401,
-  title: "Mulan",
-};
+// const sampleMovie = {
+//   id: 337401,
+//   title: "Mulan",
+// };
 
-describe("Movies endpoint", function (){
+describe("upcoming endpoint", function (){
   // beforeEach(() => {
   //   try {
   //     api = require("../../../../index");

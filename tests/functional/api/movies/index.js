@@ -8,8 +8,8 @@ const expect = chai.expect;
 let token;
 
 const sampleMovie = {
-  id: 337401,
-  title: "Mulan",
+  id: 508442,
+  title: "Soul",
 };
 
 describe("Movies endpoint", function (){
@@ -61,19 +61,19 @@ describe("Movies endpoint", function (){
   });
 
   describe("GET /movies/:id", () => {
-    // describe("when the id is valid", () => {
-    //   it("should return the matching movie", () => {
-    //     return request(api)
-    //       .get(`/api/movies/${sampleMovie.id}`)
-    //       .set("Accept", "application/json")
-    //       .set("Authorization", token)
-    //       .expect("Content-Type", /json/)
-    //       .expect(200)
-    //       .then((res) => {
-    //         expect(res.body).to.have.property("title", sampleMovie.title);
-    //       });
-    //   });
-    // });
+     describe("when the id is valid", () => {
+       it("should return the matching movie", () => {
+         return request(api)
+           .get(`/api/movies/${sampleMovie.id}`)
+          .set("Accept", "application/json")
+           .set("Authorization", token)
+           .expect("Content-Type", /json/)
+           .expect(200)
+           .then((res) => {
+             expect(res.body).to.have.property("title", sampleMovie.title);
+           });
+       });
+     });
     describe("when the id is invalid", () => {
       it("should return an empty array", () => {
         return request(api)
@@ -103,17 +103,17 @@ it("should return the new movie added with a random id and a status 201", () => 
 });
 });
 
-//  describe("delete movie", () => {
-//  it("should return the success message and a status 200", () => {
-//    return request(api)
+//   describe("delete movie", () => {
+//   it("should return the success message and a status 200", () => {
+//     return request(api)
 //      .delete(`/api/movies/${sampleMovie.id}`)
-//      .set("Authorization", token)
-//      .expect("Content-Type", /json/)
-//      .expect(200)
-//      .expect({
-//        message: `Deleted movie id: ${sampleMovie.id}.`,
-//        status: 200
-//      });
-//  });
-//  });
- });
+//       .set("Authorization", token)
+//       .expect("Content-Type", /json/)
+//       .expect(200)
+//       .expect({
+//         message: `Deleted movie id: ${sampleMovie.id}.`,
+//         status: 200
+//       });
+//   });
+//   });
+  });
